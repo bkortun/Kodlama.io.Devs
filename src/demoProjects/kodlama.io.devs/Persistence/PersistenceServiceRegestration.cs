@@ -19,6 +19,7 @@ namespace Persistence
             services.AddDbContext<KodlamaioDevsDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("KodlamaioDevsConnectionString")));
             
             services.AddScoped<IProgrammingLanguageRepository, ProgrammingLanguageRepository>();
+            services.AddScoped<ITechnologyRepository, TechnologyRepository>();
 
             return services;
         }
