@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Features\GithubAddresses\Commands\" />
+    <Folder Include="Features\GithubAddresses\Dtos\" />
+    <Folder Include="Features\GithubAddresses\Rules\" />
+    <Folder Include="Features\GithubAddresses\Profiles\" />
+    <Folder Include="Features\Members\Commands\" />
+    <Folder Include="Features\Members\Constants\" />
+    <Folder Include="Features\Members\Dtos\" />
+    <Folder Include="Features\Members\Models\" />
+    <Folder Include="Features\Members\Rules\" />
+    <Folder Include="Features\Members\Queries\" />
+    <Folder Include="Features\Members\Profiles\" />
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
     <Folder Include="Features\Technologies\Constants\" />
     <Folder Include="Features\Technologies\Rules\" />
