@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Application.Features.Members.Commands.LoginMember;
+using Application.Features.Members.Commands.RegisterMember;
+using Core.Security.JWT;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -7,18 +10,18 @@ namespace WebAPI.Controllers
     [ApiController]
     public class AuthController : BaseController
     {
-      /*  [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginUserCommandRequest loginUserCommandRequest)
+       [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginMemberCommandRequest loginMemberCommandRequest)
         {
-            LoginUserDto result =await Mediator.Send(loginUserCommandRequest);
+            AccessToken result =await Mediator.Send(loginMemberCommandRequest);
             return Ok(result);
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserCommandRequest registerUserCommandRequest)
+        public async Task<IActionResult> Register([FromBody] RegisterMemberCommandRequest registerMemberCommandRequest)
         {
-            RegisterUserDto result = await Mediator.Send(registerUserCommandRequest);
-            return Ok(result);
-        }*/
+            AccessToken result = await Mediator.Send(registerMemberCommandRequest);
+            return Created("",result);
+        }
     }
 }
