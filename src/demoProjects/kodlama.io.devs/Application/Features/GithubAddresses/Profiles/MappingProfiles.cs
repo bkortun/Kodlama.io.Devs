@@ -28,7 +28,7 @@ namespace Application.Features.GithubAddresses.Profiles
             CreateMap<GithubAddress,ListGithubAddressDto>().ReverseMap();
             CreateMap<IPaginate<GithubAddress>,ListGithubAddressModel>().ReverseMap();
 
-            CreateMap<GithubAddress,ListByIdGithubAddressDto>().ForMember(g=>g.Email,opt=>opt.MapFrom(m=>m.Member.Email)).ReverseMap();
+            //CreateMap<GithubAddress,ListByIdGithubAddressDto>().ForMember(g=>g.Email,opt=>opt.MapFrom(m=>m.Member.Email)).ReverseMap();
         }
     }
 }
