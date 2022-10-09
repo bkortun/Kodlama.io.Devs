@@ -1,5 +1,7 @@
-﻿using Application.Features.Members.Commands.LoginMember;
-using Application.Features.Members.Commands.RegisterMember;
+﻿using Application.Features.Auths.Commands.Register;
+using Application.Features.Auths.Dtos;
+using Core.Security.Dtos;
+using Core.Security.Entities;
 using Core.Security.JWT;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,18 +12,23 @@ namespace WebAPI.Controllers
     [ApiController]
     public class AuthController : BaseController
     {
-       [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginMemberCommandRequest loginMemberCommandRequest)
-        {
-            AccessToken result =await Mediator.Send(loginMemberCommandRequest);
-            return Ok(result);
-        }
-
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] RegisterMemberCommandRequest registerMemberCommandRequest)
+        public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto)
         {
-            AccessToken result = await Mediator.Send(registerMemberCommandRequest);
-            return Created("",result);
+            RegisterAuthCommandRequest registerAuthCommandRequest = new()
+            {
+                UserForRegisterDto = userForRegisterDto,
+                IpAddress = GetIpAddress(),
+            };
+            RegisterDto registerDto = await Mediator.Send(registerAuthCommandRequest);
+            SetRefreshTokenToCookie(registerDto.RefreshToken);
+            return Created("", registerDto.AccessToken);
+        }
+        private void SetRefreshTokenToCookie(RefreshToken refreshToken)
+        {
+            CookieOptions cookieOptions = new() { HttpOnly = true, Expires = DateTime.UtcNow.AddDays(7) };
+            Response.Cookies.Append("refreshToken", refreshToken.Token, cookieOptions);
         }
     }
+    
 }

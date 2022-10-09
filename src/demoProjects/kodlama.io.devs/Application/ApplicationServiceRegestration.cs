@@ -1,4 +1,6 @@
-﻿using Application.Features.ProgrammingLanguages.Rules;
+﻿using Application.Features.Auths.Rules;
+using Application.Features.ProgrammingLanguages.Rules;
+using Application.Services.AuthService;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
@@ -15,12 +17,15 @@ namespace Application
 {
     public static class ApplicationServiceRegestration
     {
-        public static IServiceCollection AddApplicationService(this IServiceCollection services)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddScoped<ProgrammingLanguageBusinessRules>();
+            services.AddScoped<AuthBusinessRules>();
+
+            services.AddScoped<IAuthService,AuthManager>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

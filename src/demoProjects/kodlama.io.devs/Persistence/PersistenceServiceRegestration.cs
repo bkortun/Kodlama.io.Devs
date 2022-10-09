@@ -14,7 +14,7 @@ namespace Persistence
 {
     public static class PersistenceServiceRegestration
     {
-        public static IServiceCollection AddPersistenceService(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<KodlamaioDevsDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("KodlamaioDevsConnectionString")));
             
@@ -22,6 +22,9 @@ namespace Persistence
             services.AddScoped<ITechnologyRepository, TechnologyRepository>();
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<IGithubAddressRepository, GithubAddressRepository>();
 
             return services;

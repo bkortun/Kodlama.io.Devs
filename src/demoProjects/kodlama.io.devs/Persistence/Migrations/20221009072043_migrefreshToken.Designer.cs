@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,10 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(KodlamaioDevsDbContext))]
-    partial class KodlamaioDevsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221009072043_migrefreshToken")]
+    partial class migrefreshToken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,41 +54,44 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2")
-                        .HasColumnName("Created");
+                        .HasColumnName("PasswordSalt");
 
                     b.Property<string>("CreatedByIp")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("CreatedByIp");
+                        .HasColumnName("PasswordHash");
 
                     b.Property<DateTime>("Expires")
                         .HasColumnType("datetime2")
-                        .HasColumnName("Expires");
+                        .HasColumnName("Email");
 
                     b.Property<string>("ReasonRevoked")
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ReasonRevoked");
+                        .HasColumnName("AuthenticatorType");
 
                     b.Property<string>("ReplacedByToken")
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ReplacedByToken");
+                        .HasColumnName("AuthenticatorType");
 
                     b.Property<DateTime?>("Revoked")
                         .HasColumnType("datetime2")
-                        .HasColumnName("Revoked");
+                        .HasColumnName("Status");
 
                     b.Property<string>("RevokedByIp")
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("RevokedByIp");
+                        .HasColumnName("AuthenticatorType");
 
                     b.Property<string>("Token")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Token");
+                        .HasColumnName("LastName");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int")
-                        .HasColumnName("UserId");
+                        .HasColumnName("FirstName");
 
                     b.HasKey("Id");
 

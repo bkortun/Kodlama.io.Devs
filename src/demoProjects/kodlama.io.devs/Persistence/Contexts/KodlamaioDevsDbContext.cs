@@ -23,6 +23,7 @@ namespace Persistence.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<GithubAddress> GithubAddresses { get; set; }
 
@@ -63,6 +64,22 @@ namespace Persistence.Contexts
                 a.Property(p => p.AuthenticatorType).HasColumnName("AuthenticatorType");
                 a.HasMany(p => p.UserOperationClaims);
                 a.HasMany(p => p.RefreshTokens);
+            });
+
+            modelBuilder.Entity<RefreshToken>(a =>
+            {
+                a.ToTable("RefreshTokens").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.UserId).HasColumnName("UserId");
+                a.Property(p => p.Token).HasColumnName("Token");
+                a.Property(p => p.Expires).HasColumnName("Expires");
+                a.Property(p => p.Created).HasColumnName("Created");
+                a.Property(p => p.CreatedByIp).HasColumnName("CreatedByIp");
+                a.Property(p => p.Revoked).HasColumnName("Revoked");
+                a.Property(p => p.RevokedByIp).HasColumnName("RevokedByIp");
+                a.Property(p => p.ReplacedByToken).HasColumnName("ReplacedByToken");
+                a.Property(p => p.ReasonRevoked).HasColumnName("ReasonRevoked");
+                a.HasOne(u => u.User);
             });
 
             modelBuilder.Entity<Member>(a =>

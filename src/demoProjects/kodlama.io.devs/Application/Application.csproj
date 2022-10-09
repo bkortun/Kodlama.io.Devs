@@ -8,9 +8,11 @@
 
   <ItemGroup>
     <Folder Include="Features\GithubAddresses\Rules\" />
+    <Folder Include="Features\Members\Commands\" />
     <Folder Include="Features\Members\Constants\" />
     <Folder Include="Features\Members\Dtos\" />
     <Folder Include="Features\Members\Models\" />
+    <Folder Include="Features\Members\Profiles\" />
     <Folder Include="Features\Members\Rules\" />
     <Folder Include="Features\Members\Queries\" />
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
