@@ -17,7 +17,10 @@ namespace Application.Features.UserOperationClaims.Profiles
         {
             CreateMap<UserOperationClaim, ListUserOperationClaimDto>().ForMember(u => u.Email, opt => opt.MapFrom(p => p.User.Email)).ForMember(u=>u.Name,opt=>opt.MapFrom(u=>u.OperationClaim.Name)).ReverseMap();
             CreateMap<ListUserOperationClaimModel,IPaginate<UserOperationClaim>>().ReverseMap();
-           
+
+            CreateMap<ListByEmailUserOperationClaimModel, IPaginate<UserOperationClaim>>().ReverseMap();
+            CreateMap<UserOperationClaim,ListByEmailUserOperationClaimDto>().ForMember(u=>u.Email,opt=>opt.MapFrom(p=>p.User.Email)).ForMember(u => u.Name, opt => opt.MapFrom(u => u.OperationClaim.Name)).ReverseMap();
+
         }
     }
 }
